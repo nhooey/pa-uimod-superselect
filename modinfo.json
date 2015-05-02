@@ -1,0 +1,28 @@
+{
+    "context": "client",
+    "identifier": "com.pa.coldboot.superselect",
+    "display_name": "Super Select",
+    "description": "Excellent ways to select units like: Cycle-select one unit in selection, select previous selection, etc.",
+    "author": "coldboot",
+    "version": "1.0.0",
+    "signature": "not yet implemented",
+    "priority": 10,
+    "enabled": true,
+    "id": "superselect",
+    "forum": "TODO",
+    "category": [
+        "in-game",
+        "ui"
+    ],
+    "icon": "https://raw.githubusercontent.com/nhooey/pa-uimod-superselect/master/icon.png",
+    "scenes": {
+        "global_mod_list": [
+            "coui://ui/mods/superselect/superselect.js"
+        ],
+        "live_game": [
+            "coui://ui/mods/superselect/live_game.js"
+        ]
+    },
+    "date": "2015/05/01",
+    "build": "80462"
+}

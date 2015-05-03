@@ -31,16 +31,12 @@ var get_current_selection = function() {
 };
 
 var get_previous_selection = function() {
-    selection_index--;
-    selection = [];
-    if (selection_index >= 0) {
-        selection = selection_stack[selection_index];
-    }
-    return selection;
+    selection_index = Math.max(0, selection_index-1);
+    return selection_stack[selection_index];
 };
 
 var get_next_selection = function() {
-    selection_index++;
+    selection_index = Math.min(selection_stack.length-1, selection_index+1);
     return selection_stack[selection_index];
 };
 
@@ -93,19 +89,18 @@ model.select_each_unit_in_selection = function() {
 
 // Select Previous Selection
 model.select_previous_selection = function() {
-    var selection = get_selected_unit_ids(model.selection());
-    var prev = [];
+    var selection = [];
 
     if (last_cycled) {
-        prev = get_current_selection() || [];
+        selection = get_current_selection() || [];
     } else {
-        do {
-            prev = get_previous_selection() || [];
-        } while (selection.length && selection.equals(prev));
+        selection = get_selectionious_selection() || [];
     }
 
     last_cycled = null;  // Clear the cycle-selection state
-    engine.call('select.byIds', prev);
+    if (selection.length) {
+        engine.call('select.byIds', selection);
+    }
 };
 
 // Select Next Selection

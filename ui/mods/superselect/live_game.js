@@ -18,8 +18,8 @@ var push_no_consecutive_dupes_or_empties = function (a, e) {
         return;
     }
 
-    if (!(a.length && a[a.length-1].equals(e))) {
-        sorted = e.slice().sort();
+    sorted = e.slice().sort();
+    if (!(a.length && a[a.length-1].equals(sorted))) {
         return a.push(sorted);
     }
 };
@@ -27,7 +27,8 @@ var push_no_consecutive_dupes_or_empties = function (a, e) {
 var get_selected_unit_ids = function(selection_model) {
     var unit_ids = [];
     if (selection_model && selection_model.spec_ids) {
-        return _.chain(selection_model.spec_ids).toArray().flatten().value();
+        return _.chain(selection_model.spec_ids).toArray() .flatten()
+                                                .value().slice().sort();
     }
     return unit_ids;
 };

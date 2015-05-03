@@ -99,7 +99,7 @@ model.selection.subscribe(function (value) {
         if (selection) {
             push_no_consecutive_dupes_or_empties(selection_stack, selection);
 
-            while (selection_stack.length > 10) {
+            while (selection_stack.length > MAX_SELECTIONS) {
                 selection_stack.shift();
             }
         }

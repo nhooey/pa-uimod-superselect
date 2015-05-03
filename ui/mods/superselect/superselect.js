@@ -19,9 +19,9 @@ var kb = function(name, def) {
 };
 
 set = 'gameplay';
-display_sub_group = 'Edit Selection';
-kb('cycle_one_in_selection');
+display_sub_group = 'Selection Cycles';
 kb('select_previous_selection');
 kb('select_next_selection');
+kb('select_each_unit_in_selection');
 
 })();

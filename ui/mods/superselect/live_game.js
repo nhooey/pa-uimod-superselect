@@ -64,7 +64,7 @@ var get_selected_unit_ids = function(selection_model) {
 
 
 // Cycle Selection of One Unit
-model.cycle_one_in_selection = function() {
+model.select_each_unit_in_selection = function() {
 
     // You can't cycle if there is no superset selection, or a cycle selection
     if (model.selection()) {

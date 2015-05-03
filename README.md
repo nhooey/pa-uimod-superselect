@@ -7,8 +7,9 @@ A Planetary Annihilation UI Mod
 This is a modification for the popular real-time strategy game: Planetary Annihilation.
 
 In general it adds many more ways to select units. Specifically it currently has these two features:
-- **Select Previous Selection:** Keeps a history of up to the last 32 selections you made. ("Select Next Selection" is planned).
-- **Cycle One in Selection:** Cycles through each individual unit of the current selection.
+- **Select Previous Selection:** Selects the previous selection, up to 32 selections ago.
+- **Select Next Selection:** Goes forward in the list of selections after going back. Exactly like a "Selection Undo Buffer".
+- **Select Each Unit in Selection:** Cycles through each individual unit of the current selection.
 
 Both features are compatible with each other. Try it and you'll see.
 

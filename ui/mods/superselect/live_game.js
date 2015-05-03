@@ -1,5 +1,6 @@
 (function() {
 
+var MAX_SELECTIONS = 32;
 var last_cycled = null;
 var selection_stack = [];
 

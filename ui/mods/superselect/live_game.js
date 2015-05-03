@@ -73,7 +73,7 @@ model.cycle_one_in_selection = function() {
 
 
 // Selection Previous Selection
-model.select_previous_selection = input.doubleTap(function() {
+model.select_previous_selection = function() {
     last_cycled = null;  // Clear the cycle-selection state
 
     var selection = get_selected_unit_ids(model.selection());
@@ -84,9 +84,7 @@ model.select_previous_selection = input.doubleTap(function() {
     } while (selection.length && selection.equals(prev));
 
     engine.call('select.byIds', prev);
-}, function() {
-    api.camera.track(true);
-});
+};
 
 
 // Selection Subscriber

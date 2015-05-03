@@ -22,5 +22,6 @@ set = 'gameplay';
 display_sub_group = 'Edit Selection';
 kb('cycle_one_in_selection');
 kb('select_previous_selection');
+kb('select_next_selection');
 
 })();

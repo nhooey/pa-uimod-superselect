@@ -4,7 +4,7 @@
     "display_name": "Super Select",
     "description": "Excellent ways to select units like: \"Select Previous Selection\", \"Cycle One Unit in Selection\", etc.",
     "author": "coldboot",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "signature": "not yet implemented",
     "priority": 10,
     "enabled": true,

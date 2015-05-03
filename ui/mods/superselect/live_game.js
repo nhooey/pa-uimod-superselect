@@ -94,7 +94,7 @@ model.select_previous_selection = function() {
     if (last_cycled) {
         selection = get_current_selection() || [];
     } else {
-        selection = get_selectionious_selection() || [];
+        selection = get_previous_selection() || [];
     }
 
     last_cycled = null;  // Clear the cycle-selection state

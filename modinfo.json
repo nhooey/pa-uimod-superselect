@@ -14,7 +14,7 @@
         "in-game",
         "ui"
     ],
-    "icon": "https://raw.githubusercontent.com/nhooey/pa-uimod-superselect/master/icon.png",
+    "icon": "https://raw.githubusercontent.com/nhooey/pa-uimod-superselect/master/img/icon.png",
     "scenes": {
         "global_mod_list": [
             "coui://ui/mods/superselect/superselect.js"

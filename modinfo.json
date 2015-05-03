@@ -2,7 +2,7 @@
     "context": "client",
     "identifier": "com.pa.coldboot.superselect",
     "display_name": "Super Select",
-    "description": "Excellent ways to select units like: Cycle-select one unit in selection, select previous selection, etc.",
+    "description": "Excellent ways to select units like: \"Select Previous Selection\", \"Cycle One Unit in Selection\", etc.",
     "author": "coldboot",
     "version": "1.0.0",
     "signature": "not yet implemented",

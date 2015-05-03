@@ -1,5 +1,5 @@
 # Super Select #
-![Super Select Icon](icon.png)
+![Super Select Icon](img/icon.png)
 
 A Planetary Annihilation UI Mod
 

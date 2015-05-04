@@ -1,7 +1,7 @@
 (function() {
 
 var MAX_SELECTIONS = 32;
-var last_cycled = null;
+var last_cycled = [];
 
 var selection_stack = [];
 var selection_index = 0;
@@ -68,7 +68,7 @@ model.select_each_unit_in_selection = function() {
 
         // Find the next position in the cycle, and loop if at the end
         if (!_.isEmpty(superset)) {
-            index = superset.indexOf(last_cycled);
+            index = superset.indexOf(_.first(last_cycled));
             if (index < 0) {
                 index = 0;
             } else {
@@ -79,7 +79,7 @@ model.select_each_unit_in_selection = function() {
 
         if (unit) {
             engine.call('select.byIds', [unit]);
-            last_cycled = unit;
+            last_cycled = [unit];
         }
     }
 };
@@ -89,13 +89,13 @@ model.select_each_unit_in_selection = function() {
 model.select_previous_selection = function() {
     var selection = [];
 
-    if (last_cycled) {
+    if (!_.isEmpty(last_cycled)) {
         selection = get_current_selection() || [];
     } else {
         selection = get_previous_selection() || [];
     }
 
-    last_cycled = null;  // Clear the cycle-selection state
+    last_cycled = [];  // Clear the cycle-selection state
     if (!_.isEmpty(selection)) {
         engine.call('select.byIds', selection);
     }
@@ -104,7 +104,7 @@ model.select_previous_selection = function() {
 // Select Next Selection
 model.select_next_selection = function() {
     var next = get_next_selection();
-    last_cycled = null;  // Clear the cycle-selection state
+    last_cycled = [];  // Clear the cycle-selection state
     engine.call('select.byIds', next);
 };
 
@@ -116,9 +116,7 @@ model.selection_subscriber = function(payload) {
     if (payload && model.mode() != 'select') {
         var unit_ids = get_selected_unit_ids(payload);
 
-        last_cycled = null;  // Clear the cycle-selection state
-
-        if (!_.isEmpty(unit_ids)) {
+        if (unit_ids && !unit_ids.equals(last_cycled)) {
             set_next_selection(unit_ids);
         }
     }

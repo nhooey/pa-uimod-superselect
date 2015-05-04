@@ -47,11 +47,11 @@ var set_next_selection = function(selection) {
     selection_index = selection_stack.length - 1;
 };
 
-var get_selected_unit_ids = function(selection_model) {
+var get_selected_unit_ids = function(payload) {
     var unit_ids = [];
-    if (selection_model && selection_model.spec_ids) {
-        return _.chain(selection_model.spec_ids).toArray().flatten()
-                                                .value().slice().sort();
+    if (payload && payload.spec_ids) {
+        unit_ids = _.clone(_.chain(payload.spec_ids)
+                          .toArray().flatten().value()).sort();
     }
     return unit_ids;
 };
@@ -110,18 +110,21 @@ model.select_next_selection = function() {
 
 
 // Selection Subscriber
-model.selection.subscribe(function (value) {
+model.selection_subscriber = function(payload) {
+
     // Only capture selection events that are completed
-    if (value && value.selectionResult) {
-        var selection = value.selectionResult;
+    if (payload && model.mode() != 'select') {
+        var unit_ids = get_selected_unit_ids(payload);
 
         last_cycled = null;  // Clear the cycle-selection state
 
-        if (selection) {
-            set_next_selection(selection);
+        if (!_.isEmpty(unit_ids)) {
+            set_next_selection(unit_ids);
         }
     }
-});
+};
+
+model.selection.subscribe(model.selection_subscriber);
 
 api.Panel.message('', 'inputmap.reload');
 

@@ -16,13 +16,11 @@ Array.prototype.equals = function(a2) {
 };
 
 var push_no_consecutive_dupes_or_empties = function (a, e) {
-    if (!(e && e.length)) {
-        return;
-    }
-
-    sorted = e.slice().sort();
-    if (!(a.length && a[a.length-1].equals(sorted))) {
-        return a.push(sorted);
+    if (!_.isEmpty(e)) {
+        sorted = e.slice().sort();
+        if (!(!_.isEmpty(a) && _.last(a).equals(sorted))) {
+            return a.push(sorted);
+        }
     }
 };
 
@@ -69,7 +67,7 @@ model.select_each_unit_in_selection = function() {
         var unit = null;
 
         // Find the next position in the cycle, and loop if at the end
-        if (superset.length) {
+        if (!_.isEmpty(superset)) {
             index = superset.indexOf(last_cycled);
             if (index < 0) {
                 index = 0;
@@ -98,7 +96,7 @@ model.select_previous_selection = function() {
     }
 
     last_cycled = null;  // Clear the cycle-selection state
-    if (selection.length) {
+    if (!_.isEmpty(selection)) {
         engine.call('select.byIds', selection);
     }
 };

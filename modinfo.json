@@ -4,7 +4,7 @@
     "display_name": "Super Select",
     "description": "Powerful ways to select units like: \"Select Prev/Next Selection\", \"Select Each Unit in Selection\", etc.",
     "author": "coldboot",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "signature": "not yet implemented",
     "priority": 10,
     "enabled": true,

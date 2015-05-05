@@ -17,7 +17,7 @@ Array.prototype.equals = function(a2) {
 
 var push_no_consecutive_dupes_or_empties = function (a, e) {
     if (!_.isEmpty(e)) {
-        sorted = e.slice().sort();
+        sorted = _.clone(e).sort();
         if (!(!_.isEmpty(a) && _.last(a).equals(sorted))) {
             return a.push(sorted);
         }

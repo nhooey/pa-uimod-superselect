@@ -116,7 +116,8 @@ model.selection_subscriber = function(payload) {
     if (payload && model.mode() != 'select') {
         var unit_ids = get_selected_unit_ids(payload);
 
-        if (unit_ids && !unit_ids.equals(last_cycled)) {
+        if (unit_ids && !unit_ids.equals(last_cycled) &&
+            !unit_ids.equals(selection_stack[selection_index])) {
             set_next_selection(unit_ids);
         }
     }

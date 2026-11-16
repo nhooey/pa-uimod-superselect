@@ -9,4 +9,4 @@ Super Select, a client UI mod for the game Planetary Annihilation that adds ways
 - `superselect install [--link] [--force]`, `superselect uninstall`, `superselect path`: put the mod in, take it out of, or locate it in the game's `client_mods` directory (`--client-mods DIR` or `PA_CLIENT_MODS` to override). The code is `scripts/superselect.py`.
 - `tests`: runs the `superselect` tool's unit tests in `tests/`.
 - `nix fmt`: formats the repository with treefmt (nixfmt for `.nix`, prettier for JavaScript, JSON and Markdown).
-- `nix flake check`: checks the flake, its dev shell and that every file is formatted.
+- `nix flake check`: checks the flake, its dev shell, the `superselect` tool's unit tests and that every file is formatted.

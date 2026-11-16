@@ -76,8 +76,26 @@ def remove(path):
         shutil.rmtree(path)
 
 
+def refuse_checkout(root, target):
+    """Refuse to remove a target that is, or holds, the checkout itself.
+
+    A clone made straight into client_mods under the identifier's name is
+    the install target too; removing it would delete the checkout. A
+    symlink to the checkout is fine: removing it only unlinks it.
+    """
+    if target.is_symlink() or not target.exists():
+        return
+    checkout = Path(root).resolve()
+    resolved = target.resolve()
+    if resolved == checkout or resolved in checkout.parents:
+        raise SystemExit(
+            f"superselect: {target} holds this checkout; refusing to remove it"
+        )
+
+
 def install(root, target, link=False, force=False):
     """Copy or symlink the mod's entries from root into target."""
+    refuse_checkout(root, target)
     if target.exists() or target.is_symlink():
         if not force:
             raise SystemExit(f"superselect: {target} exists; pass --force to replace it")
@@ -137,6 +155,7 @@ def main(argv=None):
     elif args.command == "uninstall":
         if not (target.exists() or target.is_symlink()):
             raise SystemExit(f"superselect: {target} is not installed")
+        refuse_checkout(root, target)
         remove(target)
         print(f"Removed {target}")
     return 0

@@ -152,6 +152,37 @@ class CheckoutTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.run_main("uninstall")
 
+    def test_refuses_to_replace_checkout_in_client_mods(self):
+        # A clone made straight into client_mods under the identifier's name
+        # is both the checkout and the install target.
+        self.mods = self.root.parent
+        self.root = self.root.rename(self.mods / "com.example.mod")
+        for argv in (("install", "--force"), ("install", "--force", "--link")):
+            with self.assertRaises(SystemExit):
+                self.run_main(*argv)
+            self.assertTrue((self.root / "modinfo.json").is_file())
+        with self.assertRaises(SystemExit):
+            self.run_main("uninstall")
+        self.assertTrue((self.root / "README.md").is_file())
+
+    def test_refuses_target_holding_checkout(self):
+        target = self.mods / "com.example.mod"
+        target.mkdir(parents=True)
+        self.root = self.root.rename(target / "checkout")
+        with self.assertRaises(SystemExit):
+            self.run_main("install", "--force")
+        with self.assertRaises(SystemExit):
+            self.run_main("uninstall")
+        self.assertTrue((self.root / "modinfo.json").is_file())
+
+    def test_replaces_symlink_to_checkout(self):
+        # Unlinking a symlink to the checkout leaves the checkout alone.
+        self.mods.mkdir()
+        (self.mods / "com.example.mod").symlink_to(self.root)
+        self.run_main("install", "--force")
+        self.assertFalse((self.mods / "com.example.mod").is_symlink())
+        self.assertTrue((self.root / "modinfo.json").is_file())
+
 
 if __name__ == "__main__":
     unittest.main()

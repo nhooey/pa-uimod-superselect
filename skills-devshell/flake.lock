@@ -131,6 +131,23 @@
         "type": "github"
       }
     },
+    "cc-safety-net": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792213229,
+        "narHash": "sha256-OdAUAfHcnUI4OyF4ixUni26Cw1n2XbJ7o7nrMr4teCU=",
+        "owner": "kenryu42",
+        "repo": "cc-safety-net",
+        "rev": "7d94f342c2c2a1d42299d26c060eac8c651b07c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kenryu42",
+        "ref": "plugin",
+        "repo": "cc-safety-net",
+        "type": "github"
+      }
+    },
     "coding-agent-skills": {
       "inputs": {
         "agent-skill-flake": "agent-skill-flake_2",
@@ -142,16 +159,15 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1794779740,
-        "narHash": "sha256-bymfB0iLgzD1tUdi7S2mB8Uo4FVFxzx9+fgL8SN3AC4=",
+        "lastModified": 1794835805,
+        "narHash": "sha256-RdXBW11Ohs1rWb2LuwyuL7tfZ+25GDTPWWslDBI+ykE=",
         "owner": "nhooey",
         "repo": "coding-agent-skills",
-        "rev": "780cb3651e94d62419914d16780bc5ed3cc6428c",
+        "rev": "a8d03e69c170765b7f8ff66853c3618e67f5206e",
         "type": "github"
       },
       "original": {
         "owner": "nhooey",
-        "ref": "overnight-skills",
         "repo": "coding-agent-skills",
         "type": "github"
       }
@@ -472,16 +488,15 @@
         "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
-        "lastModified": 1794773950,
-        "narHash": "sha256-71i3iPpufuxf0mXgNoaU3V6EGqxesY2D7PARpVzgs0k=",
+        "lastModified": 1794836858,
+        "narHash": "sha256-HRb/sSxQ9uumRHC3A6UyQdbemZCTsr+Kj9K5qcWKLQc=",
         "owner": "nhooey",
         "repo": "git-skills",
-        "rev": "114b1b91f649d664b265cf1a04dcd6716fe5b6af",
+        "rev": "0833b8bd927ac25be3a602f5b88774bbf09c8df9",
         "type": "github"
       },
       "original": {
         "owner": "nhooey",
-        "ref": "overnight-skills",
         "repo": "git-skills",
         "type": "github"
       }
@@ -515,6 +530,7 @@
     "shell-skills": {
       "inputs": {
         "agent-skill-flake": "agent-skill-flake_4",
+        "cc-safety-net": "cc-safety-net",
         "flake-parts": "flake-parts_7",
         "nixpkgs": [
           "nixpkgs"
@@ -524,16 +540,15 @@
         "treefmt-nix": "treefmt-nix_7"
       },
       "locked": {
-        "lastModified": 1794776627,
-        "narHash": "sha256-A4QUGwKYAQuBdM3oXaRQJ9Z/Tq/JhxhNRpLZAaYAJ3U=",
+        "lastModified": 1794835949,
+        "narHash": "sha256-cJpnSj0MEjxo4HWl7m6XoAhnG2tSSKvbRIniFa3cTSI=",
         "owner": "nhooey",
         "repo": "shell-skills",
-        "rev": "55d02d5cd67abd01ca76b53ff1e2b150954c122f",
+        "rev": "0001d245bf4aeab943efb91247e714a398ef2b91",
         "type": "github"
       },
       "original": {
         "owner": "nhooey",
-        "ref": "overnight-skills",
         "repo": "shell-skills",
         "type": "github"
       }

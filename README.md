@@ -37,6 +37,8 @@ To get the mod working from the source code, follow these steps:
 - Clone the github repository somewhere
 - Enter the dev shell with `nix develop` and run `superselect install` (or `superselect install --link` to symlink the checkout, so edits show when the game reloads its UI)
   - `superselect path` prints where it puts the mod; pass `--client-mods DIR` or set `PA_CLIENT_MODS` if the game keeps `client_mods` somewhere else
+  - Without Nix, run the same tool with Python 3 from the checkout: `python3 scripts/superselect.py install`
+  - On macOS the mod goes in `~/Library/Application Support/Uber Entertainment/Planetary Annihilation/client_mods/com.pa.coldboot.superselect/`
 - Run PAMM
 - Click on the "UI Mods" section
 - Find the "Super Select" and click it to activate

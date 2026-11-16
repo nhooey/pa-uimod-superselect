@@ -35,8 +35,8 @@ If you would like contribute, send a pull request. Just don't send me tabs. I ha
 To get the mod working from the source code, follow these steps:
 
 - Clone the github repository somewhere
-- Copy the checkout (the directory holding `modinfo.json`) to this directory, naming it `com.pa.coldboot.superselect`:
-  - Mac OS: `~/Library/Application Support/Uber Entertainment/Planetary Annihilation/client_mods/`
+- Enter the dev shell with `nix develop` and run `superselect install` (or `superselect install --link` to symlink the checkout, so edits show when the game reloads its UI)
+  - `superselect path` prints where it puts the mod; pass `--client-mods DIR` or set `PA_CLIENT_MODS` if the game keeps `client_mods` somewhere else
 - Run PAMM
 - Click on the "UI Mods" section
 - Find the "Super Select" and click it to activate

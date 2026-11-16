@@ -7,3 +7,6 @@
 /.agents/skills/*
 !/.agents/skills/*.preferences.md
 /.claude/skills/
+
+# Python bytecode from running the superselect tool and its tests
+__pycache__/

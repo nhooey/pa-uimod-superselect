@@ -41,22 +41,65 @@
       ];
       agent-skill-flake.devshellSkills.name = "pa-uimod-superselect";
 
-      perSystem = {
-        # `nix fmt` runs nixfmt over .nix and prettier over the mod's
-        # JavaScript and JSON and the Markdown; the module adds
-        # checks.<system>.treefmt, so `nix flake check` fails on any
-        # unformatted file.
-        treefmt = {
-          projectRootFile = "flake.nix";
-          programs.nixfmt.enable = true;
-          programs.prettier.enable = true;
-          settings.formatter.prettier.includes = [
-            "*.js"
-            "*.json"
-            "*.md"
+      perSystem =
+        { pkgs, ... }:
+        let
+          # The mod's command-line tool; its code stays in scripts/.
+          superselect = pkgs.writeShellApplication {
+            name = "superselect";
+            runtimeInputs = [ pkgs.python3 ];
+            text = ''exec python3 ${./scripts/superselect.py} "$@"'';
+          };
+        in
+        {
+          packages.superselect = superselect;
+
+          devshells.default.packages = [ pkgs.python3 ];
+
+          devshells.default.commands = [
+            # dev
+            {
+              category = "dev";
+              name = "superselect";
+              help = "Install the mod into the game's client_mods (install, uninstall, path)";
+              package = superselect;
+            }
+            {
+              category = "dev";
+              name = "tests";
+              help = "Run the superselect tool's unit tests";
+              command = ''python3 -m unittest discover -s "$PRJ_ROOT/tests" "$@"'';
+            }
           ];
-          settings.global.excludes = [ "*.lock" ];
+
+          # The tool's unit tests, run by `nix flake check`.
+          checks.tests =
+            pkgs.runCommand "superselect-tests"
+              {
+                nativeBuildInputs = [ pkgs.python3 ];
+              }
+              ''
+                cp -r ${./scripts} scripts
+                cp -r ${./tests} tests
+                python3 -m unittest discover -s tests -v
+                touch $out
+              '';
+
+          # `nix fmt` runs nixfmt over .nix and prettier over the mod's
+          # JavaScript and JSON and the Markdown; the module adds
+          # checks.<system>.treefmt, so `nix flake check` fails on any
+          # unformatted file.
+          treefmt = {
+            projectRootFile = "flake.nix";
+            programs.nixfmt.enable = true;
+            programs.prettier.enable = true;
+            settings.formatter.prettier.includes = [
+              "*.js"
+              "*.json"
+              "*.md"
+            ];
+            settings.global.excludes = [ "*.lock" ];
+          };
         };
-      };
     };
 }

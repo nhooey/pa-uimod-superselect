@@ -11,18 +11,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Skill sources. They follow `nixpkgs` but not `agent-skill-flake`, so
-    # each keeps its own compatible builder.
-    coding-agent-skills = {
-      url = "github:nhooey/coding-agent-skills";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    git-skills = {
-      url = "github:nhooey/git-skills";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    shell-skills = {
-      url = "github:nhooey/shell-skills";
+    # skillspkgs' per-family combinations; this repository takes the
+    # browser-extensions-and-game-mods family's. It follows `nixpkgs` but not
+    # `agent-skill-flake`, so the combination keeps its own compatible builder.
+    skillspkgs-combinations = {
+      url = "github:nhooey/skillspkgs?dir=sources/combinations";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -38,19 +31,10 @@
       systems = import inputs.systems;
       name = "pa-uimod-superselect-devshell";
       sources = [
-        # Commits, branches and pull requests.
-        { source = inputs.git-skills; }
-        # Safe shell commands: named deletes, PIDs, no machine-wide changes.
-        { source = inputs.shell-skills; }
-        # Running a prompt as a headless session in other checkouts, keeping
-        # the scratchpad tidy, and the cross-repository plan's graph.
+        # The family's one skill source. No additions: the mod is JavaScript
+        # like the rest of its family.
         {
-          source = inputs.coding-agent-skills;
-          skills = [
-            "coding-agent-headless-in-checkout"
-            "coding-agent-plans-as-graph"
-            "coding-agent-scratchpad-scripts"
-          ];
+          source = inputs.skillspkgs-combinations.combinations.browser-extensions-and-game-mods;
         }
       ];
     };
